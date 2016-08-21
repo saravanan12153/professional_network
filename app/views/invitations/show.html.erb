@@ -1,0 +1,79 @@
+<div class="container-fluid">
+
+    <div class="col-md-12">
+    <h1>Welcome <%= @user.name %>!</h1>
+    <h4>Expand your network: <a href="/users" data-method="get">All Users</a></h4>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Here is your profile description:</h3>
+          </div>
+          <div class="panel-body">
+            <%= @user.description %>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Your Professional Network</h3>
+          </div>
+          <div class="panel-body">
+
+            <ul>
+                <% @user_inviteds.each do |invited| %>
+                <li><a href="/users/<%= invited.invited.id %>"><%= invited.invited.name %></a></li>
+                <% end %>
+                <% @user_invited_bys.each do |invited_by| %>
+                <li><a href="/users/<%= invited_by.user.id %>"><%= invited_by.user.name %></a></li>
+                <% end %>
+            </ul>
+          </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Invitations</h3>
+
+        </div>
+      <div class="panel-body">
+          <p>The following have asked you to be in their network:</p>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+              <% if @inviters %>
+              <% @inviters.each do |inviter| %>
+            <tr>
+              <td><a href="/users/<%= inviter.user.id %>"><%= inviter.user.name %></a></td>
+              <td>
+                  <form action="/invitations/<%= inviter.user.id %>" method='post'>
+                    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+                    <input type='hidden' name='_method' value='patch'>
+                    <input type='submit' class="btn btn-default" value="Accept Invite">
+                  </form>
+                  <form action="/invitations" method='post'>
+                    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+                    <input type='hidden' name='_method' value='delete'>
+                    <input type="hidden" name="inviter" value="<%= inviter.user.id %>">
+                    <input type='submit' class="btn btn-default" value="Ignore">
+                  </form>
+              </td>
+            </tr>
+              <% end %>
+              <% end %>
+              </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+
+</div>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Professional Network</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="col-md-2 col-md-offset-10">
+    <% if current_user %>
+    <form action='/sessions' method='post'>
+        <input type='hidden' name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type='hidden' name='_method' value='delete'>
+        <button type="submit" class="btn btn-default">Log Out</button>
+    </form>
+    <% end %>
+</div>
+
+    <% if flash[:errors] %>
+        <hr>
+
+        <div class="alert alert-danger" role="alert"> <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> <% flash[:errors].each do |message| %> <%= message %>. <% end %></div>
+
+    <% end %>
+<%= yield %>
+</div>
+</body>
+</html>
