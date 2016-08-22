@@ -12,8 +12,6 @@ class User < ActiveRecord::Base
   :foreign_key => 'invited_id',
   :association_foreign_key => 'user_id'
 
-  has_many :invitations
-  
   EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]+)\z/i
 
   validates :name, :email, :description, presence: true, length: { minimum: 2 }
