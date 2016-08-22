@@ -14,7 +14,7 @@
 # Configure Using Gemfile
 # gem 'pg'
 #
-default: &default
+  default: &default
   adapter: postgresql
   encoding: unicode
   # username: ubuntu
@@ -23,11 +23,11 @@ default: &default
   pool: 5
 
 development:
-    adapter: postgresql
-    encoding: unicode
-    pool: 5
-    username: ubuntu
-    password:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: ubuntu
+  password:
   <<: *default
   database: felisa_project_development
 
@@ -96,4 +96,4 @@ production:
   pool: 5
   database: felisa_project_production
   username: ubuntu
-  password: 
+  password:
