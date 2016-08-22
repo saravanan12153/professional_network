@@ -14,10 +14,10 @@
 # Configure Using Gemfile
 # gem 'pg'
 #
-  default: &default
+default: &default
   adapter: postgresql
   encoding: unicode
-  username: ubuntu
+  # username: ubuntu
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
@@ -29,7 +29,7 @@ development:
   username: ubuntu
   password:
   <<: *default
-  database: felisa_project_development
+  database: professional_network_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -66,7 +66,7 @@ test:
   encoding: unicode
   pool: 5
   <<: *default
-  database: felisa_project_test
+  database: professional_network_test
   username: ubuntu
   password:
 
@@ -94,6 +94,6 @@ production:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  database: felisa_project_production
+  database: professional_network_production
   username: ubuntu
   password:
